@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Indústria - Funcionários</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+
+<body>
+	<main>
+		<div class="container mt-4">
+			<!-- Title -->
+			<h1 class="titulo">Indústria - Funcionários</h1>
+
+			<!-- Buttons -->
+			<div class="botoes">
+				<button type="button" class="btn btn-primary" id="restaurar">Restaurar Dados Padrões</button>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNovoFuncionario">
+					Novo Funcionário
+				</button>
+				<div class="container mt-4">
+					<div id="message" class="alert" role="alert" style="display: none;"></div>
+				</div>
+			</div>
+
+			<div class="container mt-4">
+				<div class="row">
+					<div class="col-md-10">
+						<div class="input-group">
+							<input id="searchField" type="text" class="form-control" placeholder="Buscar por nome">
+							<div class="input-group-append">
+								<span class="input-group-text" style="background-color: black;">
+									<i class="fas fa-search" style="color: white;"></i>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<select id="filterCombo" class="form-control select2-container--bootstrap452"></select>
+					</div>
+				</div>
+			</div>
+
+
+			<br />
+
+			<div class="row">
+				<div class="col-md-6 offset-md-6 text-md-right">
+					<span id="total-salarios" class="badge badge-primary">Carregando...</span>
+				</div>
+			</div>
+
+			<!-- Table -->
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th><a th:href="@{/api/funcionarios(sort='nome')}">Nome</a></th>
+						<th><a th:href="@{/api/funcionarios(sort='dataNascimento')}">Data de Nascimento</a></th>
+						<th><a th:href="@{/api/funcionarios(sort='salario')}">Salário</a></th>
+						<th><a th:href="@{/api/funcionarios(sort='funcao')}">Função</a></th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="FuncionarioDTO : ${funcionarios}">
+						<td th:text="${FuncionarioDTO.nome}"></td>
+						<td th:text="${FuncionarioDTO.dataNascimentoFormatted}"></td>
+						<td th:text="${FuncionarioDTO.salarioFormatted}"></td>
+						<td th:text="${FuncionarioDTO.funcao}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		</div>
+	</main>
+
+	<!-- Footer -->
+	<footer>
+		<p>Esse projeto foi desenvolvido por Rafael Orlando.</p>
+	</footer>
+
+	<!-- Modal Novo Funcionário -->
+	<div class="modal fade" id="modalNovoFuncionario" tabindex="-1" role="dialog"
+		aria-labelledby="modalNovoFuncionarioLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalNovoFuncionarioLabel">Novo Funcionário</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="novoFuncionarioForm">
+						<div class="form-group">
+							<label for="nome">Nome</label>
+							<input type="text" class="form-control" id="nome" required>
+						</div>
+						<div class="form-group">
+							<label for="dataNascimento">Data de Nascimento</label>
+							<input type="date" class="form-control" id="dataNascimento" required>
+						</div>
+						<div class="form-group">
+							<label for="salario">Salário</label>
+							<input type="number" class="form-control" id="salario" required>
+						</div>
+						<div class="form-group">
+							<label for="funcao">Função</label>
+							<input type="text" class="form-control" id="funcao" required>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+					<button type="button" class="btn btn-primary" id="salvarFuncionario">Salvar</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Edição Funcionário -->
+	<div class="modal fade" id="modalAtualizaFuncionario" tabindex="-1" role="dialog"
+		aria-labelledby="modalNovoFuncionarioLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modalNovoFuncionarioLabel">Atualizar Funcionário</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="novoFuncionarioForm">
+						<div class="form-group">
+							<label for="nome">Nome</label>
+							<input type="text" class="form-control" id="nomeAtualizar" required>
+						</div>
+						<div class="form-group">
+							<label for="dataNascimento">Data de Nascimento</label>
+							<input type="date" class="form-control" id="dataNascimentoAtualizar" required>
+						</div>
+						<div class="form-group">
+							<label for="salario">Salário</label>
+							<input type="number" class="form-control" id="salarioAtualizar" required>
+						</div>
+						<div class="form-group">
+							<label for="funcao">Função</label>
+							<input type="text" class="form-control" id="funcaoAtualizar" required>
+						</div>
+						<div class="form-group">
+							<label for="funcao">Dar Aumento %</label>
+							<input type='number' step='0.01' min="0.01" placeholder='0.00%' class="form-control"
+								id="aumento" required>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+					<button type="button" class="btn btn-primary" id="salvarFuncionarioEdicao">Salvar</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Funcionário com maior idade e exibicao de relação de salario/salario minimo-->
+	<div class="modal fade" id="funcionarioMaiorIdade" tabindex="-1" aria-labelledby="funcionarioModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="funcionarioModalLabel">Detalhes do Funcionário</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7/jquery.inputmask.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.full.min.js"></script>
+	<script src="/js/main.js"></script>
+	<script src="/js/validacoes.js"></script>
+
+</body>
+
+</html>
