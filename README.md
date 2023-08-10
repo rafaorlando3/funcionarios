@@ -30,15 +30,37 @@ O projeto utiliza as seguintes tecnologias:
 
 O sistema foi desenvolvido de forma a cumprir todos os requisitos especificados, permitindo o gerenciamento eficiente dos funcionários da indústria.
 
-## Como Executar
+## Como Executar e Testar o Projeto
 
-Para executar o projeto, siga os seguintes passos:
+Para executar e testar o projeto, siga os seguintes passos:
 
-1. Certifique-se de ter o Java instalado em seu computador.
-2. Clone o repositório para sua máquina.
-3. Abra o projeto em sua IDE Java de preferência.
-4. Execute a classe `Principal` para ver os resultados das operações.
+1. **Baixar e Instalar o Spring Tools Suite:**
 
-O projeto oferece uma visão completa das funcionalidades implementadas, facilitando o entendimento e a utilização das operações de gerenciamento de funcionários.
+   - Baixe o Spring Tools Suite (STS) da página oficial: [Spring Tools Suite](https://spring.io/tools).
+   - Siga as instruções de instalação específicas para o seu sistema operacional.
+
+2. **Clonar o Repositório:**
+
+   - Abra o Spring Tools Suite.
+   - No menu superior, selecione "File" > "Import...".
+   - Na janela de importação, escolha "Git" > "Projects from Git" e clique em "Next".
+   - Selecione "Clone URI" e clique em "Next".
+   - No campo "URI", insira o URL do repositório (URL do seu repositório Git) e clique em "Next".
+   - Siga as etapas para configurar o repositório, como selecionar o branch principal (normalmente, "main" ou "master").
+   - Escolha o diretório de destino e clique em "Next".
+   - Selecione "Import existing Eclipse projects" e clique em "Next".
+   - Selecione o projeto e clique em "Finish".
+
+3. **Executar o Projeto:**
+
+   - No Spring Tools Suite, navegue até a classe `Principal` no pacote que contém a lógica do projeto.
+   - Clique com o botão direito na classe `Principal` e selecione "Run As" > "Java Application".
+   - Isso executará a classe e mostrará os resultados das operações no console.
+
+4. **Testar no Navegador:**
+
+   - Abra um navegador da web.
+   - Digite a URL: `http://localhost:8080` (por padrão, o servidor incorporado do Spring Boot roda na porta 8080).
+   - Você será direcionado para a página inicial do projeto, onde poderá interagir com as operações implementadas.
 
 Também coloquei o arquivo Sistema_Funcionarios_Exportado.jar caso seja conveniente.
