@@ -40,3 +40,5 @@ Para executar o projeto, siga os seguintes passos:
 4. Execute a classe `Principal` para ver os resultados das operações.
 
 O projeto oferece uma visão completa das funcionalidades implementadas, facilitando o entendimento e a utilização das operações de gerenciamento de funcionários.
+
+Também coloquei o arquivo Sistema_Funcionarios_Exportado.jar caso seja conveniente.
